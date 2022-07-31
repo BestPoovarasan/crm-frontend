@@ -46,32 +46,53 @@ export default function Dashboard() {
                   </MDBNavbarBrand>
                 </Link>
                 <div className="sidebutton p-3 gap-5">
+                <Link to="/dashboard">
                   <MDBBtn className="sidebtn">
                     <i class="fa-solid fa-chart-line"></i> Dashboard
                   </MDBBtn>
+                  </Link>
+                  <Link to="/servicereq"> 
                   <MDBBtn className="sidebtn">
                     <i class="fa-solid fa-paper-plane"></i> Service Request
                   </MDBBtn>
-                  <MDBBtn className="sidebtn">
-                    <i class="fa-solid fa-repeat"></i> Service Status
-                  </MDBBtn>
-                  <MDBBtn className="sidebtn">
-                    <i class="fa-solid fa-user"></i> Profile
-                  </MDBBtn>
+                  </Link>
+                  
+                  
+                  <Link to="/">
                   <MDBBtn className="sidebtn">
                     <i class="fa-solid fa-right-from-bracket"></i> Logout
                   </MDBBtn>
+                  </Link>
+                  
                 </div>
               </div>
             </MDBNavbarNav>
 
             <div className="nameicon d-grid gap-2 d-md-flex justify-content-md-end">
-              <h5>poovarasan</h5>
+              <h5>User</h5>
               <span class="material-symbols-outlined">face</span>
             </div>
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
+      <MDBContainer className="chart gap-5">
+        <div className="back p-4">
+        <MDBBtn className="btn ">Overal Request</MDBBtn>
+        <h3 className="text-center m-3">37890</h3>
+        </div>
+        <div className="back p-4">
+        <MDBBtn className="btn">Request Successed</MDBBtn>
+        <h3 className="text-center m-3">7890</h3>
+     </div>
+     <div className="back p-4">
+     <MDBBtn className="btn">Pending Request</MDBBtn>
+     <h3 className="text-center m-3">3890</h3>
+    </div>
+    <div className="m">
+    <img alt="example" className="img-fluid headerimg" src="./chart.png" />
+    </div>
+    </MDBContainer>
+  
     </>
   );
 }

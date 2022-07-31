@@ -3,12 +3,12 @@ import "../signup/signup.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik, Formik, Form, Field } from "formik";
 import axios from "axios";
-// import { config } from "./config";
 import {
   MDBInput,
   MDBContainer,
   MDBCol,
   MDBRow,
+  MDBTextArea,
   MDBCheckbox,
   MDBBtn,
   MDBIcon,
@@ -36,21 +36,22 @@ const validate = values => {
   return errors;
 };
 
-export default function Signup() {
+export default function Servicereq() {
   let navigation = useNavigate();
   const formik = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
       email: "",
-      password: ""
+      role:"",
+      desc:""
     },
     validate,
     onSubmit: async (values) => {
       try {
-         await axios.post("https://crm-app-management.herokuapp.com/register", values);
+         await axios.post("https://crm-app-management.herokuapp.com/servicereq", values);
 // (JSON.stringify(values, null, 2));
-          navigation("/");
+          navigation("/dashboard");
       } catch (error) {
       }
   },
@@ -58,9 +59,9 @@ export default function Signup() {
   return (
     <MDBContainer className="loginform">
       <div className="d-flex flex-wrap justify-content-center align-items-center mt-3 gap-5">
-        <img alt="example" className="img-fluid headerimg" src="./crm.png" />
+        
         <form onSubmit={formik.handleSubmit}>
-          <h1 className="p-3">Register User Account</h1>
+        <h1 className="p-3 text-center">Service Request</h1>
           <MDBRow className="mb-4">
             <MDBCol>
               <MDBInput
@@ -94,13 +95,15 @@ export default function Signup() {
           />{formik.errors.email ? <div style={{ color: "red" }}>{formik.errors.email}</div> : null}
           
           <MDBInput
-            Name="password"
+            Name="role"
             className="mb-4"
-            type="password"
-            label="Password"
+            type="text"
+            label="Role"
             onChange={formik.handleChange}
-            value={formik.values.password}
+            value={formik.values.role}
           />
+          <MDBTextArea Name="desc" label='Message'  className="mb-4"
+          id='textAreaExample' rows={4} onChange={formik.handleChange} value={formik.values.desc} />
           <MDBBtn
             type={"submit"}
             value="Submit"
@@ -108,12 +111,14 @@ export default function Signup() {
             className="mb-4"
             block
           >
-            Register
+            Request
           </MDBBtn>
+          <Link to="/dashboard">
+          <MDBBtn>Dashboard</MDBBtn></Link>
           <div className="text-center">
-            <p>
-              Already have account? <Link to="/">Login</Link>
-            </p>
+            {/* <p>
+              edit
+            </p> */}
           </div>
         </form>
       </div>

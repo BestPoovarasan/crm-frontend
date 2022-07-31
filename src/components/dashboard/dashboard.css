@@ -32,3 +32,19 @@
     color: white;
 }
 
+.chart{
+    margin: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+}
+.m{
+    margin-left: 150px;
+}
+.back{
+    background: radial-gradient(circle at 0% -25%,#FF8947 0%,#FF8354 0,#DA2C94 42%,#3E13A5 110%);
+    border-radius: 12px;
+    color: white;
+}

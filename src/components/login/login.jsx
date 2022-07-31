@@ -1,6 +1,6 @@
 import React from "react";
 import "../login/login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "axios";
 // import { config } from "./config";
@@ -25,15 +25,22 @@ const validate = (values) => {
 };
 // values
 export default function Login() {
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       email: "",
-      pass: "",
+      password: ""
     },
+
     validate,
-    // submit
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        await axios.post("https://crm-app-management.herokuapp.com/login", values);
+        // localStorage.setItem("react_app_token", login.data.token);
+        navigate("/dashboard");
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
   return (
@@ -42,6 +49,7 @@ export default function Login() {
         <img alt="example" className="img-fluid headerimg" src="./crm.png" />
         <form onSubmit={formik.handleSubmit}>
           <h1 className="p-3">Login User Account</h1>
+          {/* email */}
           <MDBInput
             className="mb-4"
             type="email"
@@ -50,9 +58,10 @@ export default function Login() {
             onChange={formik.handleChange}
             value={formik.values.email}
           />{formik.errors.email ? <div style={{ color: "red" }}>{formik.errors.email}</div> : null}
-          
-          <MDBInput className="mb-4" type="password" label="Password" Name="pass" onChange={formik.handleChange}
-            value={formik.values.pass}/>
+          {/* password */}
+          <MDBInput className="mb-4" type="password" label="Password" Name="password" onChange={formik.handleChange}
+            value={formik.values.password}/>
+            {/* submit button */}
           <MDBBtn type={"submit"} value="Submit" className="mb-4" block>
             Sign in
           </MDBBtn>
@@ -61,7 +70,7 @@ export default function Login() {
               Not a member? <Link to="/signup">Register User</Link>
             </p>
             <p>
-              Admin <Link to="/signup">Login</Link>
+              Login ID Demo <Link to="/demo">Login</Link>
             </p>
           </div>
         </form>
